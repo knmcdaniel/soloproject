@@ -1,0 +1,278 @@
+html {
+    background-color: grey;
+}
+
+*  {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 25px;
+    margin: auto;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    width: 1200px;
+    min-height: 700px;
+    background-color: white;
+    border-radius: 30px;
+    z-index: -10;
+}
+
+
+/* ul {
+    width: 100%;
+}
+ul li {
+    width: 49%;
+    display: inline-block;
+}
+
+ul li > * {
+    width: 100%;
+} */
+
+input .submit {
+    padding: 55px;
+}
+
+.messages {
+    color: red;
+}
+
+header h1 {
+    padding-left: 40px;
+    padding-top: 5px;
+    font-size: 30px;
+}
+
+.customcontent {
+    display:flex;
+}
+
+div .view_book{
+    width: 50%;
+    padding:20px;
+}
+
+form {
+    width: 50%;
+    padding:20px;
+}
+
+div .all_products {
+    width: 1100px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.book_list_item {
+    list-style: none;
+}
+
+.logout_button {
+    float: right;
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+.destroy {
+    background-color: red;
+}
+
+.empty {
+    list-style:none;
+}
+
+.Credentials {
+    position:absolute;
+    margin-left:900px;
+    margin-top: 12px;
+}
+
+.Invalid {
+    position: fixed;
+    margin-left:350px;
+}
+
+.First {
+    margin-top: 20px;
+}
+
+.Last {
+    margin-top: 40px;
+}
+
+.Length {
+    margin-top: 60px;
+}
+
+.Email {
+    margin-top: 60px;
+}
+
+
+
+
+header h1 img{
+    margin-top: 10px;
+    width: 200px;
+    height: 50px;
+}
+
+header hr {
+    margin-bottom: 0em;
+}
+
+h1.title {
+    margin-top: 0em;
+    padding: 0em;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+
+
+.radioboxholder {
+    margin-top: 15px;
+
+}
+
+.radioboxholder label {
+    background-color: white;
+    color: black;
+}
+
+a:hover .destory {
+    background-color: rgb(255, 97, 97);
+    color: white;
+}
+
+.purchased {
+    color: black;
+    width: 225px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    justify-content: center;
+
+}
+
+.on_sale {
+    box-shadow: 0px 0px 5px 5px #ff102791;
+}
+
+.sold_out {
+    font-weight: bold;
+    color: red;
+}
+
+.center_button {
+    margin-left: 35px;
+}
+
+.center_button_sold_out {
+    margin-left: 50px;
+}
+
+.single_product_info {
+    float: left;
+    width: 75%;
+}
+.account {
+    margin-left: 35px;
+}
+
+.singe_product_buyers {
+    float: right;
+    width: 25%;
+}
+
+.confirmation {
+    width: 90%;
+    padding: auto;
+    margin: auto;
+}
+
+.confirmation_button {
+    margin: auto;
+}
+
+
+/* Pokemon testing below */
+
+.customcontent {
+    display: flex;
+}
+
+.pokemon {
+    color: black;
+    width: 15%;
+    height: 15%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    justify-content: center;
+}
+
+.pokemon img {
+    width: 140px;
+    height: 140px;
+    padding-left: auto;
+    padding-right: auto;
+}
+
+.pokemon object {
+    width: 140px;
+    height: 140px;
+    padding-left: auto;
+    padding-right: auto;
+}
+
+.pokemon p {
+    text-transform: capitalize;
+    text-align: center;
+    white-space: nowrap;
+}
+
+div .sale progress {
+    width: 20%;
+    height: 50px;
+}
+
+label .forSale {
+    text-decoration: line-through;
+}
+
+
+.saleButton {
+    color: #ebebeb;
+    text-shadow: 0 0 30px #ff5f40;
+    box-shadow: 0px 0px 20px 20px #ff102791;
+    width: 400px;
+    height: 50px;
+    background-color: #ff102791;
+    cursor: pointer;
+    border-radius: 10px;
+    border-width: 0px;
+    margin-left: 15px;
+    margin-top: 35px;
+    text-align: center;
+  }
+
+.saleButton h1 {
+    color: white;
+}

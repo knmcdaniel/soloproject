@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login or Register</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        
+    </head>
+    <body>
+
+        <!-- Logo -->
+        <header>
+
+            <h1>
+                <a href="home"><img src="{% static 'images/company_logo.png' %}"/> </a>
+            </h1>
+
+            <hr>
+
+        </header>
+
+        <div class="customcontent">
+
+            <!-- Register Form -->
+            <form action="register" method="POST">
+                
+                {% csrf_token %}
+
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{message}}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <h1 class="title"> Register </h1>
+
+                <label for="first_name" class="label">First Name:</label>
+                <input class="input" type="text" name="first_name" id="first_name" >
+
+                <label for="last_name" class="label">Last Name:</label>
+                <input class="input" type="text" name="last_name" id="last_name">
+
+                <label for="email" class="label">Email:</label>
+                <input class="input" type="text" name="email" id="email" >
+
+                <label for="password" class="label">Password:</label>
+                <input class="input" type="password" name="password" id="password">
+
+                <label for="confirm_password" class="label">Confirm Password:</label>
+                <input class="input" type="password" name="confirm_password" id="confirm_password">
+
+                <div class="radioboxholder">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label for="false" class="btn btn-secondary active">
+                            <input type="radio" name="is_vendor" id="False" value="False" checked> Basic User
+                        </label>
+                    
+                        <label for="true" class="btn btn-secondary">
+                            <input type="radio" name="is_vendor" id="True" value="True"> Vendor
+                        </label>
+                    </div>
+                </div>  
+                
+                <br>
+                
+                <input class="button" type="submit" name="register" id="register" value="Register">
+
+            </form>
+
+            <!-- Login Form -->
+            <form action="login" method="POST">
+                {% csrf_token %}
+
+                <h1 class="title"> Login </h1>
+
+                <label for="email" class="label">Email:</label>
+                <input class="input" type="text" name="email" id="emailk" >
+
+                <label for="password" class="label">Password:</label>
+                <input class="input" type="password" name="password" id="password">
+
+                <input class="button" type="submit" name="login" id="login" value="Login">
+                
+            </form>
+        </div>
+    </body>
+</html>

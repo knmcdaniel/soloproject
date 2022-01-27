@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Account Home</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+    </head>
+    <body>
+
+        <!-- Navigation -->
+        <div class="logout_button">
+
+            <a href="/home"><button class="button">Home</button></a>
+            <a href="/account/{{ user.id }}/view"><button class="button">Account</button></a>
+            <a href="/logout"><button class="button">Logout</button></a>
+            {% if user.is_vendor == 'True' %}
+            <a href="/product/new"><button class="button">New Product</button></a>
+            {% endif %}
+            
+        </div>
+
+        <!-- Logo -->
+        <header>
+            
+            <h1>
+            
+                <a href="home"><img src="{% static 'images/company_logo.png' %}"/> </a>
+            
+            </h1>
+
+            <hr>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="content account">
+            
+            <h1>Welcome to your account home {{ user.first_name }}</h1>
+            
+            <!-- Display Previously Purchased Products - Everyone -->
+            {% if products_purchased %}
+
+                <hr>
+                <h3> Your Previously Purchased Products</h3>
+                <hr>
+
+            {% else %}
+
+                <hr>
+                <h3> Products you purchase will be displayed here.</h3>
+                <hr>
+
+            {% endif %}
+
+            <div class="all_products customcontent">
+                {% for product in products_purchased %}
+                    {% if product.on_sale == 'False' %}
+                        <div class="purchased">
+                            <h4> {{ product.product_name}} </h4>
+                            <h5>Price: {{ product.price}} </h5>
+                            <a href="/product/{{product.id}}"><button class="button center_button">View Product</button></a>
+                        </div>
+                    {% else %}
+                        <div class="purchased on_sale">
+                            <h4> {{ product.product_name}} </h4>
+                            <h5>On-Sale Price: ${{ product.sale_price}}</h5>
+                            {% if product.quantity > 0 %}
+                                <a href="/product/{{product.id}}"><button class="button center_button">View Product</button></a>
+                            {% else %}
+                                <a href="/product/{{product.id}}"><button class="button center_button_sold_out" disabled>Sold Out</button></a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <hr>
+            </div>
+
+
+            <!-- Display Products You Own/Manage - Vendors Only -->
+            {% if user.is_vendor == 'True' %}
+                <hr>
+                <a href="/product/new"><button class="button logout_button">New Product</button></a>
+                <h3> Your Products</h3>
+                <hr>
+
+                <div class="all_products">
+                    <table class="table is-fullwidth is-striped is-hoverable">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Sale Price</th>
+                            <th>On-Sale</th>
+                            <th>Quantity</th>
+                            <th>Sales</th>
+                            <th>Control</th>
+                        </tr>
+                        {% for product in products_owned %}
+                                {% if product.on_sale == 'True' %}
+                                    <tr class="on_sale">
+                                {% else %}
+                                    <tr>
+                                {% endif %}
+                                    <td>{{ product.product_name}}</td>
+                                    <td>{{ product.price}}</td>
+                                    <td>{{ product.sale_price}}</td>
+                                    <td>{{ product.on_sale}}</td>
+                                    {% if product.quantity < 1 %}
+                                    <td class="sold_out">{{ product.quantity}}</td>
+                                    {% else %}
+                                    <td>{{ product.quantity}}</td>
+                                    {% endif %}
+                                    <td>{{ product.amount_sold}}</td>
+                                    <td>
+                                        <a href="/product/{{product.id}}/edit"><button class="button">Edit</button></a>
+                                        <a class="destory" href="/product/{{product.id}}/destory"><button class="button destory" type="submit">Delete</button></a>
+                                    </td>
+                                </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+
+        </div>
+    </body>
+</html>

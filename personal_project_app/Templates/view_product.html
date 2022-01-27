@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>View Product</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+
+        <!-- Navigation -->
+        <div class="logout_button">
+            <a href="/home"><button class="button">Home</button></a>
+            <a href="/account/{{ user.id }}/view"><button class="button">Account</button></a>
+            <a href="/logout"><button class="button">Logout</button></a>
+            {% if user.is_vendor == 'True' %}
+            <a href="/product/new"><button class="button">New Product</button></a>
+            {% endif %}
+            
+        </div>
+
+        <!-- Logo -->
+        <header>
+            <h1>
+            <a href="home"><img src="{% static 'images/company_logo.png' %}"/> </a>
+            </h1>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <!-- Product Info -->
+            <div class="single_product_info">
+                {% if product.on_sale == 'True' %}
+                    <div class="saleButton">
+                        <h1>This Product is On Sale!</h1> 
+                    </div>
+                {% endif %}
+
+                <h1 class="label">Product Name: {{product.product_name}}</h1>
+                
+                {% if product.on_sale != 'True' %}
+                    <h1 class="label">Price: {{product.price}}</h1>
+                {% else %}
+                    <h1 class="label" style="text-decoration: line-through;">Price: {{product.price}} </h1>
+                    <h1 class="label">On-Sale Price: {{product.sale_price}}</h1>
+                {% endif %}
+
+                {% if product.quantity < 1 %}
+                    <h1 class="label">Remaining Inventory: Sold out!</h1>
+
+                    <a href="/product/{{product.id}}/buy"><button class="button" disabled>Sold Out!</button></a>
+                {% else %}
+                    <h1 class="label">Remaining Inventory: {{product.quantity}}</h1>
+
+                    <a href="/product/{{product.id}}/buy"><button class="button">Buy</button></a>
+                {% endif %}
+                
+
+                {% if user.is_vendor == 'True' and product.vendor == user %}
+                    <a href="/product/{{product.id}}/edit"><button class="button">Edit</button></a>
+                    <a class="destory" style="float:right" href="/product/{{product.id}}/destory"><button class="button destory">Delete</button></a>
+                {% endif %}
+            </div>
+
+            <!-- Previous Buyers -->
+            <div class="single_product_buyers">
+
+                <h1 class="label">Previous Buyers</h1>
+                
+                {% for buyer in buyers %}
+                    <p class="label">{{buyer.first_name}} {{buyer.last_name}}</p>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </body>
+</html>

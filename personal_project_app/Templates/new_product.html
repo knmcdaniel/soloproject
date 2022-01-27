@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Product</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+
+        <!-- Navigation -->
+        <div class="logout_button">
+
+            <a href="/home"><button class="button">Home</button></a>
+            <a href="/account/{{ user.id }}/view"><button class="button">Account</button></a>
+            <a href="/logout"><button class="button">Logout</button></a>
+            {% if user.is_vendor == 'True' %}
+                <a href="/product/new"><button class="button">New Product</button></a>
+            {% endif %}
+            
+        </div>
+
+        <!-- Logo -->
+        <header>
+
+            <h1>
+                <a href="home"><img src="{% static 'images/company_logo.png' %}"/> </a>
+            </h1>
+
+            <hr>
+
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <!-- Create Product Form -->
+            <form action="create" method="POST">
+                {% csrf_token %}
+
+                {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <h1 class="title"> Create a New Product </h1>
+
+                <label for="product_name" class="label">Product Name:</label>
+                <input class="input" type="text" name="product_name" id="product_name" >
+
+                <label for="price" class="label">Price:</label>
+                <input class="input" type="text" name="price" id="price">
+
+                <label for="sale_price" class="label">On-Sale Price:</label>
+                <input class="input" type="text" name="sale_price" id="sale_price">
+
+                <label for="quantity" class="label">Quantity:</label>
+                <input class="input" type="text" name="quantity" id="quantity" >
+
+                <div class="radioboxholder">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label for="false" class="btn btn-secondary active">
+                        <input type="radio" name="on_sale" id="False" value="False" checked> Not On-Sale
+                        </label>
+                    
+                        <label for="true" class="btn btn-secondary">
+                        <input type="radio" name="on_sale" id="True" value="True"> On-Sale
+                        </label>
+                    </div>
+                </div>  
+                <br>
+
+                <input class="button" type="submit" name="register" id="register" value="Create Product">
+
+            </form>
+
+        </div>
+    </body>
+</html>

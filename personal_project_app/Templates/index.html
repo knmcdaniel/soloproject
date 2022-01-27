@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome!</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+    </head>
+    <body>
+
+        <!-- Navigation -->
+        <div class="logout_button">
+
+            <a href="/login_registration"><button class="button">Login</button></a>
+            <a href="/login_registration"><button class="button">Register</button></a>
+            
+        </div>
+
+        <!-- Logo -->
+        <header>
+
+            <h1>
+                <a href="home"><img src="{% static 'images/company_logo.png' %}"/> </a>
+            </h1>
+
+            <hr>
+
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <h1> Welcome to Quick Shop! Login to Purchase Products</h1>
+
+            <div class="all_products customcontent">    
+                {% for product in products %}
+                    {% if product.quantity > 0 %}
+                        {% if product.on_sale == 'False' %}
+                            <div class="purchased">
+                                <h4> {{ product.product_name}} </h4>
+                                <h5>Price: {{ product.price}} </h5>
+                                <a href="/product/{{product.id}}"><button class="button center_button">View Product</button></a>
+                            </div>
+                        {% else %}
+                            <div class="purchased on_sale">
+                                <h4> {{ product.product_name}} </h4>
+                                <h5>On-Sale Price: ${{ product.sale_price}}</h5>
+                                <a href="/product/{{product.id}}"><button class="button center_button">View Product</button></a>
+                            </div>
+                        {% endif %}
+                    {% endif %}                
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

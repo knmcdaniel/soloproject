@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+    </head>
+    <body>
+
+        <h1>All Users</h1>
+
+
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Books Favorited</th>
+            </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.password }}</td>
+                        
+                    </tr>
+                {% endfor %}
+        </table>
+
+
+        <h1>All Books</h1>
+
+
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Uploaded By</th>
+        </tr>
+        {% for quote in quotes %}
+            <tr>
+                <td>{{ quote.id }}</td>
+                <td>{{ quote.author }}</td>
+                <td>{{ quote.quote }}</td>
+                <td>{{ quote.uploaded_by }}</td>
+                <td>{{ quote.users_that_favorited }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <a href="/"><input class="button" type="button" name="login" id="login" value="Register/Login"></a>
+        <a href="/books"><input class="button" type="button" name="login" id="login" value="Books"></a>
+
+    </body>
+</html>
